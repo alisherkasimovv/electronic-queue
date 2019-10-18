@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employees {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,4 +41,10 @@ public class Employees {
     @Column(name = "portrait", columnDefinition = "TEXT")
     private String portrait;
 
+    /*
+     * Relations
+     */
+
+    @ManyToOne
+    private Department department;
 }
