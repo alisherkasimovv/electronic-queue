@@ -3,8 +3,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.Nullable;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.*;
 import java.util.*;
@@ -34,6 +37,18 @@ public class Service {
     @Column(name = "difficulty")
     private int difficulty;
 
+    /*
+     * Timestamps
+     */
+    @CreationTimestamp
+    private LocalDateTime createDateTime;
+
+    @UpdateTimestamp
+    private LocalDateTime updateDateTime;
+
+    /*
+     * Relations
+     */
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,

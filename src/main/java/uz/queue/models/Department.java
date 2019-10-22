@@ -3,7 +3,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.Nullable;
+
+import java.time.LocalDateTime;
 import java.util.*;
 import javax.persistence.*;
 
@@ -27,18 +31,26 @@ public class Department {
     @Column(name = "description", unique = true)
     private String description;
 
-    @Column(name = "employee", unique = true)
-    private int employee;
+    /*
+     * Timestamps
+     */
+    @CreationTimestamp
+    private LocalDateTime createDateTime;
 
-//    @Column(name = "services", unique = true)
-//    private int services;
+    @UpdateTimestamp
+    private LocalDateTime updateDateTime;
 
+    /*
+     * Relations
+     */
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
             mappedBy = "department")
-    private Set<Service> service = new HashSet<>();
+    private Set<Service> services = new HashSet<>();
 
+    @OneToMany(mappedBy="department")
+    private Set<Employee> employees;
 }

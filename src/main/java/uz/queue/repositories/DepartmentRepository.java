@@ -9,6 +9,6 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
 
     Department findByName(String name);
     Department findById (int Id);
-    Department findByEmployee(int employee);
+    Department findByEmployees(int employee);
 
 }

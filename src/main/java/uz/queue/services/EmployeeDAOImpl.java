@@ -44,7 +44,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         temp.setUsername(employee.getUsername());
         temp.setFirstName(employee.getFirstName());
         temp.setLastName(employee.getLastName());
-        temp.setPortrait(employee.getPortrait());
 
         repository.save(temp);
     }

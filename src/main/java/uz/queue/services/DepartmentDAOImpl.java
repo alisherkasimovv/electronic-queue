@@ -25,7 +25,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
     @Override
     public Department getByEmployee(int employee) {
-        return departmentRepository.findByEmployee(employee);
+        return departmentRepository.findByEmployees(employee);
     }
 
     @Override
@@ -44,8 +44,6 @@ public class DepartmentDAOImpl implements DepartmentDAO {
         Department temp= departmentRepository.findById(department.getId());
         temp.setName(department.getName());
         temp.setDescription(department.getDescription());
-        temp.setService(department.getService());
-        temp.setEmployee(department.getEmployee());
 
         departmentRepository.save(temp);
     }
