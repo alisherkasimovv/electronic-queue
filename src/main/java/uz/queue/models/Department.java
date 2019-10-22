@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
-import javax.persistence.OneToMany;
 import java.util.*;
-
-
 import javax.persistence.*;
 
 @Entity
@@ -30,12 +27,18 @@ public class Department {
     @Column(name = "description", unique = true)
     private String description;
 
+    @Column(name = "employee", unique = true)
+    private int employee;
+
+//    @Column(name = "services", unique = true)
+//    private int services;
+
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
-            mappedBy = "services")
+            mappedBy = "department")
     private Set<Service> service = new HashSet<>();
 
 }
