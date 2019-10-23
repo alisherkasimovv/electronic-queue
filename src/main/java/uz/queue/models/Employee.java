@@ -57,4 +57,11 @@ public class Employee {
     @JoinColumn(name = "department_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Department department;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "service_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Service prioritizedService;
+
+
 }

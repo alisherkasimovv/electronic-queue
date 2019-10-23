@@ -59,4 +59,6 @@ public class Service {
             inverseJoinColumns = { @JoinColumn(name = "department_id") })
     private Set<Department> department = new HashSet<>();
 
+    @OneToMany(mappedBy="prioritized")
+    private Set<Employee> employees;
 }

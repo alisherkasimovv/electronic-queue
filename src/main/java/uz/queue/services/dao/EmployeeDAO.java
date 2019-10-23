@@ -13,6 +13,6 @@ public interface EmployeeDAO {
     Employee getByUsername(String username);
     void saveEmployee(Employee employee);
     void editEmployee(Employee employee);
-    void deleteEmplyee(Employee employee);
+    void deleteEmployee(Employee employee);
 
 }

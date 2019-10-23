@@ -49,7 +49,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public void deleteEmplyee(Employee employee) {
+    public void deleteEmployee(Employee employee) {
         repository.delete(employee);
     }
 }
