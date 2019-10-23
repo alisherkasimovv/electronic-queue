@@ -59,6 +59,6 @@ public class Service {
             inverseJoinColumns = { @JoinColumn(name = "department_id") })
     private Set<Department> department = new HashSet<>();
 
-    @OneToMany(mappedBy="prioritized")
+    @OneToMany(mappedBy="prioritizedService")
     private Set<Employee> employees;
 }

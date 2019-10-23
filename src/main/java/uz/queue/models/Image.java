@@ -38,8 +38,5 @@ public class Image {
             })
     @Cascade( { org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "objectId")
-
     private String objectType;
-
-
 }

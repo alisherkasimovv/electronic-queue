@@ -3,6 +3,7 @@ package uz.queue.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import uz.queue.models.Department;
 import uz.queue.models.Employee;
 import uz.queue.repositories.EmployeeRepository;
 import uz.queue.services.dao.EmployeeDAO;
@@ -21,6 +22,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public List<Employee> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<Employee> getAllInDepartment(Department department) {
+        return repository.findByDepartment(department);
     }
 
     @Override
