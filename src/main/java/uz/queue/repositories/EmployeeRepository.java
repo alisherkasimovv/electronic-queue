@@ -7,7 +7,6 @@ import uz.queue.models.Employee;
 
 import java.util.List;
 
-@Component
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     Employee findByUsername(String username);

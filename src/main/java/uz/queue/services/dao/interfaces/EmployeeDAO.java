@@ -1,12 +1,10 @@
-package uz.queue.services.dao;
+package uz.queue.services.dao.interfaces;
 
-import org.springframework.stereotype.Component;
 import uz.queue.models.Department;
 import uz.queue.models.Employee;
 
 import java.util.List;
 
-@Component
 public interface EmployeeDAO {
 
     List<Employee> getAll();

@@ -1,22 +1,20 @@
-package uz.queue.services;
+package uz.queue.services.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import uz.queue.models.Department;
 import uz.queue.models.Employee;
 import uz.queue.repositories.EmployeeRepository;
-import uz.queue.services.dao.EmployeeDAO;
+import uz.queue.services.dao.interfaces.EmployeeDAO;
 
 import java.util.List;
+
 @Service
 public class EmployeeDAOImpl implements EmployeeDAO {
 
-    @Autowired
     private EmployeeRepository repository;
 
-    public EmployeeDAOImpl(EmployeeRepository repository) {
-        this.repository = repository;
+    public EmployeeDAOImpl(EmployeeRepository employeeRepository) {
+        this.repository = employeeRepository;
     }
 
     @Override

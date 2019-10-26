@@ -1,55 +1,58 @@
-package uz.queue.services;
+package uz.queue.services.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.queue.models.Department;
 import uz.queue.repositories.DepartmentRepository;
-import uz.queue.services.dao.DepartmentDAO;
+import uz.queue.services.dao.interfaces.DepartmentDAO;
 
 import java.util.List;
+
 @Service
 public class DepartmentDAOImpl implements DepartmentDAO {
 
-    @Autowired
-    private DepartmentRepository departmentRepository;
+    private DepartmentRepository repository;
+
+    public DepartmentDAOImpl(DepartmentRepository departmentRepository) {
+        this.repository = departmentRepository;
+    }
 
     @Override
     public List<Department> getAll() {
-        return departmentRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public Department getById(int id) {
-        return departmentRepository.findById(id);
+        return repository.findById(id);
     }
 
     @Override
     public Department getByEmployee(int employee) {
-        return departmentRepository.findByEmployees(employee);
+        return repository.findByEmployees(employee);
     }
 
     @Override
     public Department getByName(String name) {
-        return departmentRepository.findByName(name);
+        return repository.findByName(name);
     }
 
     @Override
     public void saveDepartment(Department department) {
-        departmentRepository.save(department);
+        repository.save(department);
     }
 
     @Override
     public void editDepartment(Department department) {
 
-        Department temp= departmentRepository.findById(department.getId());
+        Department temp= repository.findById(department.getId());
         temp.setName(department.getName());
         temp.setDescription(department.getDescription());
 
-        departmentRepository.save(temp);
+        repository.save(temp);
     }
 
     @Override
     public void deleteDepartment(Department department) {
-departmentRepository.delete(department);
+repository.delete(department);
     }
 }

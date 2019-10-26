@@ -1,4 +1,4 @@
-package uz.queue.services.dao;
+package uz.queue.services.dao.interfaces;
 
 import org.springframework.stereotype.Component;
 import uz.queue.models.Department;

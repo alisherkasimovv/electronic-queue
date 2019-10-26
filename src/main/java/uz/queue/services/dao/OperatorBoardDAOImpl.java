@@ -1,52 +1,59 @@
-package uz.queue.services;
+package uz.queue.services.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.queue.models.OperatorBoard;
 import uz.queue.repositories.OperatorBoardRepository;
-import uz.queue.services.dao.OperatorBoardDAO;
+import uz.queue.services.dao.interfaces.OperatorBoardDAO;
 
 import java.util.List;
+
 @Service
-public class OperatorBoardDaoImpl implements OperatorBoardDAO {
+public class OperatorBoardDAOImpl implements OperatorBoardDAO {
+
+    private OperatorBoardRepository repository;
+
     @Autowired
-    private OperatorBoardRepository operatorBoardRepository;
+    public OperatorBoardDAOImpl(OperatorBoardRepository operatorBoardRepository) {
+        this.repository = operatorBoardRepository;
+    }
+
     @Override
     public List<OperatorBoard> getAll() {
-        return operatorBoardRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public OperatorBoard getById(int id) {
-        return operatorBoardRepository.findById(id);
+        return repository.findById(id);
     }
 
     @Override
-    public OperatorBoard getByIdenfication(String identification) {
-        return operatorBoardRepository.findByIdentification(identification);
+    public OperatorBoard getByIdentification(String identification) {
+        return repository.findByIdentification(identification);
     }
 
     @Override
     public OperatorBoard getByUrl(String link) {
-        return operatorBoardRepository.findByUrl(link);
+        return repository.findByLink(link);
     }
 
     @Override
     public void saveOperatorBoard(OperatorBoard operatorBoard) {
-    operatorBoardRepository.save(operatorBoard);
+        repository.save(operatorBoard);
     }
 
     @Override
     public void editOperatorBoard(OperatorBoard operatorBoard) {
 
-        OperatorBoard temp=operatorBoardRepository.findById(operatorBoard.getId());
+        OperatorBoard temp = repository.findById(operatorBoard.getId());
         temp.setIdentification(operatorBoard.getIdentification());
         temp.setLink(operatorBoard.getLink());
-        operatorBoardRepository.save(temp);
+        repository.save(temp);
     }
 
     @Override
     public void deleteOperatorBoard(OperatorBoard operatorBoard) {
-        operatorBoardRepository.delete(operatorBoard);
+        repository.delete(operatorBoard);
     }
 }

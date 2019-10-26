@@ -16,6 +16,9 @@ public class OnStartupListener implements ApplicationListener<ContextRefreshedEv
         logger.info("Application initialized correctly");
     }
 
+    /*
+     * TODO Method for creating initial users on DB
+     */
     private void createInitialUsers() {
 
     }
