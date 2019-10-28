@@ -38,6 +38,22 @@
         </tr>
     </table>
 
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+        <tr ng-repeat="board in boards">
+            <td>{{ board.id }}</td>
+            <td>{{ board.identification}}</td>
+            <td>{{ board.link }}</td>
+        </tr>
+    </table>
+
+    {{ employees }}
+    {{ boards }}
+
     <form role="form" ng-submit="saveEmployee()">
         <div class="form-group">
             <label for="firstName">First name</label>
@@ -51,9 +67,18 @@
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" placeholder="username" ng-model="emp.username" ng-value="emp.username">
         </div>
+        <div class="form-group">
+            <label for="board_id">Select operator board for user</label>
+            <select name="board_id" id="board_id">
+                <option value="" selected="selected">-- Select an option --</option>
+                <option ng-repeat="board in boards" ng-value="board.id">{{ board.identification }} | {{ board.link }}</option>
+            </select>
+        </div>
     <!-- /.box-body -->
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
+
+    {{ obj }}
 
 </section>
 

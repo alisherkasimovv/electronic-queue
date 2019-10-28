@@ -13,6 +13,7 @@ public class MainController {
     @GetMapping(value = "/")
     public ModelAndView home() {
         obj.setViewName("dashboard");
+        obj.addObject("sayHello", "Hello");
         return obj;
     }
 

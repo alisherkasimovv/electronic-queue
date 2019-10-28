@@ -1,11 +1,15 @@
 var app = angular.module("queueManager", []);
 
 app.controller('EmployeeController', function ($scope, $http) {
+    var object = [];
+
     $http({
         method: 'GET',
         url:    '/employees/get-all'
     }).then(function (response) {
-        $scope.employees = response.data;
+        $scope.employees = response.data.employees;
+        $scope.boards = response.data.boards;
+        $scope.obj = object;
     });
 
     $scope.getEmployee = function ($employee) {
@@ -18,6 +22,7 @@ app.controller('EmployeeController', function ($scope, $http) {
     };
 
     $scope.saveEmployee = function () {
+        object = $scope.emp;
         $http({
             method: 'POST',
             url:    '/employees/save',
