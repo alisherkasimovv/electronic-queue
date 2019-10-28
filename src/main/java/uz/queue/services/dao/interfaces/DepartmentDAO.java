@@ -13,6 +13,6 @@ public interface DepartmentDAO {
     Department getByName (String name);
     void saveDepartment(Department department);
     void editDepartment(Department department);
-    void deleteDepartment(Department department);
+    void deleteDepartment(int id);
 
 }

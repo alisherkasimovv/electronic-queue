@@ -54,7 +54,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
-    public void deleteDepartment(Department department) {
-repository.delete(department);
+    public void deleteDepartment(int id) {
+repository.deleteById(id);
     }
 }

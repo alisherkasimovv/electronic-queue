@@ -9,7 +9,8 @@ app.controller('EmployeeController', function ($scope, $http) {
     }).then(function (response) {
         $scope.employees = response.data.employees;
         $scope.boards = response.data.boards;
-        $scope.obj = object;
+        $scope.services = response.data.services;
+        $scope.departments = response.data.departments;
     });
 
     $scope.getEmployee = function ($employee) {
@@ -22,7 +23,7 @@ app.controller('EmployeeController', function ($scope, $http) {
     };
 
     $scope.saveEmployee = function () {
-        object = $scope.emp;
+        $scope.obj = $scope.emp;
         $http({
             method: 'POST',
             url:    '/employees/save',
@@ -101,6 +102,106 @@ app.controller('BoardController', function ($scope, $http) {
         }).then(function (response) {
             $scope.employee = response.data;
             $scope.brd = {};
+        });
+    };
+});
+
+app.controller('ServiceController', function ($scope, $http) {
+    $http({
+        method: 'GET',
+        url:    '/services/get-all'
+    }).then(function (response) {
+        $scope.services = response.data;
+    });
+
+    $scope.getService = function ($service) {
+        $http({
+            method: 'GET',
+            url:    '/services/get/' + $service.id
+        }).then(function (response) {
+            $scope.srv = response.data;
+        });
+    };
+
+    $scope.saveService = function () {
+        $http({
+            method: 'POST',
+            url:    '/services/save',
+            data:   $scope.srv
+        }).then(function (response) {
+            $scope.services = response.data;
+            $scope.srv = {};
+        });
+    };
+
+    $scope.updateService = function () {
+        $http({
+            method: 'POST',
+            url:    '/services/update',
+            data:   $scope.srv
+        }).then(function (response) {
+            $scope.services = response.data;
+            $scope.srv = {};
+        });
+    };
+
+    $scope.deleteService = function ($service) {
+        $http({
+            method: "GET",
+            url:    "/services/delete/" + $service.id
+        }).then(function (response) {
+            $scope.services = response.data;
+            $scope.srv = {};
+        });
+    };
+});
+
+app.controller('DepartmentController', function ($scope, $http) {
+    $http({
+        method: 'GET',
+        url:    '/departments/get-all'
+    }).then(function (response) {
+        $scope.departments = response.data;
+    });
+
+    $scope.getDepartment = function ($department) {
+        $http({
+            method: 'GET',
+            url:    '/departments/get/' + $department.id
+        }).then(function (response) {
+            $scope.drp = response.data;
+        });
+    };
+
+    $scope.saveDepartment = function () {
+        $http({
+            method: 'POST',
+            url:    '/departments/save',
+            data:   $scope.drp
+        }).then(function (response) {
+            $scope.departments = response.data;
+            $scope.drp = {};
+        });
+    };
+
+    $scope.updateDepartment = function () {
+        $http({
+            method: 'POST',
+            url:    '/departments/update',
+            data:   $scope.drp
+        }).then(function (response) {
+            $scope.departments = response.data;
+            $scope.drp = {};
+        });
+    };
+
+    $scope.deleteDepartment = function ($department) {
+        $http({
+            method: "GET",
+            url:    "/departments/delete/" + $department.id
+        }).then(function (response) {
+            $scope.departments = response.data;
+            $scope.drp = {};
         });
     };
 });

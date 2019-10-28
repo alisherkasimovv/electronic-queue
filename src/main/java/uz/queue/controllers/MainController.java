@@ -13,7 +13,6 @@ public class MainController {
     @GetMapping(value = "/")
     public ModelAndView home() {
         obj.setViewName("dashboard");
-        obj.addObject("sayHello", "Hello");
         return obj;
     }
 
@@ -26,6 +25,18 @@ public class MainController {
     @RequestMapping(value = "/boards")
     public ModelAndView actionBoards() {
         obj.setViewName("pages/boards");
+        return obj;
+    }
+
+    @RequestMapping(value = "/services")
+    public ModelAndView actionServices() {
+        obj.setViewName("pages/services");
+        return obj;
+    }
+
+    @RequestMapping(value = "/departments")
+    public ModelAndView actionDepartments() {
+        obj.setViewName("pages/departments");
         return obj;
     }
 

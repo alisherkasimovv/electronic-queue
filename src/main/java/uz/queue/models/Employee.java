@@ -63,7 +63,7 @@ public class Employee {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Service prioritizedService;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "board_id", referencedColumnName = "id")
     private OperatorBoard board;
 }

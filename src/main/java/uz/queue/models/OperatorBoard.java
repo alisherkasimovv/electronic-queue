@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "operator_boards")
@@ -30,6 +33,15 @@ public class OperatorBoard {
     @Nullable
     @Column(name = "url")
     private String link;
+
+    /*
+     * Timestamps
+     */
+    @CreationTimestamp
+    private LocalDateTime createDateTime;
+
+    @UpdateTimestamp
+    private LocalDateTime updateDateTime;
 
     /*
      * Relations

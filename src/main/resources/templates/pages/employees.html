@@ -68,10 +68,24 @@
             <input type="text" class="form-control" id="username" placeholder="username" ng-model="emp.username" ng-value="emp.username">
         </div>
         <div class="form-group">
-            <label for="board_id">Select operator board for user</label>
-            <select name="board_id" id="board_id">
-                <option value="" selected="selected">-- Select an option --</option>
-                <option ng-repeat="board in boards" ng-value="board.id">{{ board.identification }} | {{ board.link }}</option>
+            <label for="board">Select operator board for user</label>
+            <select ng-model="emp.board" id="board" class="form-control">
+                <option value="0" selected="selected">-- Select an option --</option>
+                <option ng-repeat="board in boards" ng-value="board">{{ board.identification }} | {{ board.link }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="service">Department</label>
+            <select ng-model="emp.department" id="department" class="form-control">
+                <option value="0" selected="selected">-- Select an option --</option>
+                <option ng-repeat="department in departments" ng-value="department">{{ department.name }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="service">Select service</label>
+            <select ng-model="emp.prioritizedService" id="service" class="form-control">
+                <option value="0" selected="selected">-- Select an option --</option>
+                <option ng-repeat="service in services" ng-value="service">{{ service.name }}</option>
             </select>
         </div>
     <!-- /.box-body -->

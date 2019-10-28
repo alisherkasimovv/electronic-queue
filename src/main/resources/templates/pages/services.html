@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.0/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+</head>
+<body ng-app="queueManager">
+
+<h1>Services page</h1>
+
+<section ng-controller="ServiceController">
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        <tr ng-repeat="service in services">
+            <td>{{ service.id }}</td>
+            <td>{{ service.name }}</td>
+            <td>{{ service.description }}</td>
+            <td>
+                <div class="btn-group">
+                    <a href=""></a>
+                    <a ng-click="getService(service)" class="btn btn-info">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a ng-click="deleteService(service)" class="btn btn-info">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <form role="form" ng-submit="saveService()">
+        <div class="form-group">
+            <label for="name">Service name</label>
+            <input type="text" class="form-control" id="name" ng-model="srv.name" ng-value="srv.name">
+        </div>
+        <div class="form-group">
+            <label for="link">Description</label>
+            <input type="text" class="form-control" id="link" placeholder="Brief description" ng-model="srv.description" ng-value="srv.description">
+        </div>
+    <!-- /.box-body -->
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+</section>
+
+<script th:src="@{//webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+<script th:src="@{//webjars/angularjs/1.7.4/angular.min.js}"></script>
+<script th:src="@{//js/main.js}"></script>
+</body>
+</html>
