@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.0/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+</head>
+<body ng-app="queueManager">
+
+<h1>Employees page</h1>
+
+<section ng-controller="EmployeeController">
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Username</th>
+            <th>Actions</th>
+        </tr>
+        <tr ng-repeat="employee in employees">
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.firstName }}</td>
+            <td>{{ employee.lastName }}</td>
+            <td>{{ employee.username }}</td>
+            <td>
+                <div class="btn-group">
+                    <a href=""></a>
+                    <a ng-click="getEmployee(employee)" class="btn btn-info">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a ng-click="deleteEmployee(employee)" class="btn btn-info">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <form role="form" ng-submit="saveEmployee()">
+        <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" id="firstName" ng-model="emp.firstName" ng-value="emp.firstName">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Last name" ng-model="emp.lastName" ng-value="emp.lastName">
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="username" ng-model="emp.username" ng-value="emp.username">
+        </div>
+    <!-- /.box-body -->
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+</section>
+
+<script th:src="@{//webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+<script th:src="@{//webjars/angularjs/1.7.4/angular.min.js}"></script>
+<script th:src="@{//js/main.js}"></script>
+</body>
+</html>

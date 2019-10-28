@@ -16,11 +16,10 @@ import org.hibernate.annotations.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Nullable
     @Column(name = "image", columnDefinition = "TEXT")

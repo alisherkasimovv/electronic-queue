@@ -1,5 +1,6 @@
 package uz.queue.services.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.queue.models.Department;
 import uz.queue.repositories.DepartmentRepository;
@@ -12,6 +13,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
     private DepartmentRepository repository;
 
+    @Autowired
     public DepartmentDAOImpl(DepartmentRepository departmentRepository) {
         this.repository = departmentRepository;
     }

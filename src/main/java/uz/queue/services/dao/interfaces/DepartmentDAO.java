@@ -1,11 +1,9 @@
 package uz.queue.services.dao.interfaces;
 
-import org.springframework.stereotype.Component;
 import uz.queue.models.Department;
 
 import java.util.List;
 
-@Component
 public interface DepartmentDAO {
 
     List<Department> getAll();

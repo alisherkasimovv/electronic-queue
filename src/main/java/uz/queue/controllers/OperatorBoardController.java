@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/operator-board")
+@RequestMapping("/boards")
 public class OperatorBoardController {
 
     private OperatorBoardDAO operatorBoardDAO;
@@ -25,13 +25,13 @@ public class OperatorBoardController {
 
     @GetMapping(value="/get-all")
     public ResponseEntity<List<OperatorBoard>> getAllBoards() {
-        return new ResponseEntity<>(operatorBoardDAO.getAll(),HttpStatus.OK);
+        return new ResponseEntity<>(operatorBoardDAO.getAll(), HttpStatus.OK);
     }
 
     @PostMapping(value= "/save")
     public  ResponseEntity<List<OperatorBoard>> saveBoard(@Valid @RequestBody OperatorBoard operatorBoard){
         operatorBoardDAO.saveOperatorBoard(operatorBoard);
-        return new ResponseEntity<>(operatorBoardDAO.getAll(),HttpStatus.OK);
+        return new ResponseEntity<>(operatorBoardDAO.getAll(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/get-one/{id}")
