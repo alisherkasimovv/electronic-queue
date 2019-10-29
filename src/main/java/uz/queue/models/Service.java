@@ -1,4 +1,5 @@
 package uz.queue.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,7 +55,7 @@ public class Service {
             joinColumns = { @JoinColumn(name = "service_id") },
             inverseJoinColumns = { @JoinColumn(name = "department_id") })
     private Set<Department> department = new HashSet<>();
-
+    @JsonBackReference
     @OneToMany(mappedBy="prioritizedService")
     private Set<Employee> employees;
 }

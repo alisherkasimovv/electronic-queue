@@ -1,4 +1,6 @@
 package uz.queue.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,8 +51,10 @@ public class Department {
                     CascadeType.MERGE
             },
             mappedBy = "department")
+    @JsonBackReference
     private Set<Service> services = new HashSet<>();
 
     @OneToMany(mappedBy="department")
+    @JsonBackReference
     private Set<Employee> employees;
 }

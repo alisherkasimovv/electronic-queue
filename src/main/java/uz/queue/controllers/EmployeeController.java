@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uz.queue.models.Department;
 import uz.queue.models.Employee;
 import uz.queue.models.OperatorBoard;
+import uz.queue.models.Service;
 import uz.queue.services.dao.interfaces.DepartmentDAO;
 import uz.queue.services.dao.interfaces.EmployeeDAO;
 import uz.queue.services.dao.interfaces.OperatorBoardDAO;
@@ -24,7 +26,7 @@ public class EmployeeController {
     private DepartmentDAO departmentDAO;
     private OperatorBoardDAO boardDAO;
     private ServiceDAO serviceDAO;
-    private EmployeeWrapper wrapper;
+    private EmployeeWrapper wrapper = new EmployeeWrapper();
 
     @Autowired
     public EmployeeController(
@@ -36,15 +38,19 @@ public class EmployeeController {
         this.boardDAO = operatorBoardDAO;
         this.departmentDAO = departmentDAO;
         this.serviceDAO = serviceDAO;
-        this.wrapper = new EmployeeWrapper();
     }
 
     @GetMapping(value = "/get-all")
     public ResponseEntity<EmployeeWrapper> getAllEmployees() {
+//        List<Employee> employees = dao.getAll();
+        List<Department> departments = departmentDAO.getAll();
+        List<Service> services = serviceDAO.getAll();
+        List<OperatorBoard> boards = boardDAO.getAll();
+
         wrapper.setEmployees(dao.getAll());
-        wrapper.setBoards(boardDAO.getAll());
-        wrapper.setDepartments(departmentDAO.getAll());
-        wrapper.setServices(serviceDAO.getAll());
+        wrapper.setBoards(boards);
+        wrapper.setDepartments(departments);
+        wrapper.setServices(services);
         return new ResponseEntity<>(wrapper, HttpStatus.OK);
     }
 
@@ -55,7 +61,6 @@ public class EmployeeController {
 
     @PostMapping(value = "/save")
     public ResponseEntity<List<Employee>> saveEmployee(@Valid @RequestBody Employee employee) {
-//        System.out.println(employee.toString());
         dao.saveEmployee(employee);
         return new ResponseEntity<>(dao.getAll(), HttpStatus.OK);
     }

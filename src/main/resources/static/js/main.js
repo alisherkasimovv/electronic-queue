@@ -11,6 +11,8 @@ app.controller('EmployeeController', function ($scope, $http) {
         $scope.boards = response.data.boards;
         $scope.services = response.data.services;
         $scope.departments = response.data.departments;
+
+        $scope.obj = response;
     });
 
     $scope.getEmployee = function ($employee) {

@@ -1,6 +1,7 @@
 package uz.queue.wrappers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import uz.queue.models.Department;
 import uz.queue.models.Employee;
 import uz.queue.models.OperatorBoard;
@@ -14,6 +15,7 @@ import java.util.List;
  * Employee wrapper class is used to collect information from multiple tables on database
  * and sent using ResponseEntity.
  */
+@Component
 public class EmployeeWrapper {
 
     private List<OperatorBoard> boards;
