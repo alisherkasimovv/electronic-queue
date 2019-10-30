@@ -55,6 +55,6 @@ public class Department {
     private Set<Service> services = new HashSet<>();
 
     @OneToMany(mappedBy="department")
-    @JsonBackReference
+    @JsonManagedReference(value = "e-d")
     private Set<Employee> employees;
 }

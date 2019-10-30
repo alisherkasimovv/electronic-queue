@@ -58,17 +58,17 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference
+    @JsonBackReference(value = "e-d")
     private Department department;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "service_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference
+    @JsonBackReference(value = "e-s")
     private Service prioritizedService;
 
     @OneToOne
     @JoinColumn(name = "board_id", referencedColumnName = "id")
-    @JsonManagedReference
+    @JsonBackReference(value = "e-b")
     private OperatorBoard board;
 }

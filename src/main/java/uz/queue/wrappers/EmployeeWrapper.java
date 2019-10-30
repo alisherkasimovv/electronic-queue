@@ -15,7 +15,6 @@ import java.util.List;
  * Employee wrapper class is used to collect information from multiple tables on database
  * and sent using ResponseEntity.
  */
-@Component
 public class EmployeeWrapper {
 
     private List<OperatorBoard> boards;

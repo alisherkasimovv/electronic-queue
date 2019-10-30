@@ -1,6 +1,7 @@
 package uz.queue.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,6 +49,6 @@ public class OperatorBoard {
      * Relations
      */
     @OneToOne(mappedBy = "board")
-    @JsonBackReference
+    @JsonManagedReference(value = "e-b")
     private Employee employee;
 }
