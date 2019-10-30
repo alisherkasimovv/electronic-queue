@@ -31,7 +31,10 @@ app.controller('EmployeeController', function ($scope, $http) {
             url:    '/employees/save',
             data:   $scope.emp
         }).then(function (response) {
-            $scope.employees = response.data;
+            $scope.employees = response.data.employees;
+            $scope.boards = response.data.boards;
+            $scope.services = response.data.services;
+            $scope.departments = response.data.departments;
             $scope.emp = {};
         });
     };
@@ -42,7 +45,10 @@ app.controller('EmployeeController', function ($scope, $http) {
             url:    '/employees/update',
             data:   $scope.emp
         }).then(function (response) {
-            $scope.employees = response.data;
+            $scope.employees = response.data.employees;
+            $scope.boards = response.data.boards;
+            $scope.services = response.data.services;
+            $scope.departments = response.data.departments;
             $scope.emp = {};
         });
     };
@@ -52,7 +58,10 @@ app.controller('EmployeeController', function ($scope, $http) {
             method: "GET",
             url:    "/employees/delete/" + $employee.id,
         }).then(function (response) {
-            $scope.employee = response.data;
+            $scope.employees = response.data.employees;
+            $scope.boards = response.data.boards;
+            $scope.services = response.data.services;
+            $scope.departments = response.data.departments;
             $scope.emp = {};
         });
     };

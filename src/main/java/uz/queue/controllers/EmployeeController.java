@@ -42,16 +42,7 @@ public class EmployeeController {
 
     @GetMapping(value = "/get-all")
     public ResponseEntity<EmployeeWrapper> getAllEmployees() {
-//        List<Employee> employees = dao.getAll();
-        List<Department> departments = departmentDAO.getAll();
-        List<Service> services = serviceDAO.getAll();
-        List<OperatorBoard> boards = boardDAO.getAll();
-
-        wrapper.setEmployees(dao.getAll());
-        wrapper.setBoards(boards);
-        wrapper.setDepartments(departments);
-        wrapper.setServices(services);
-        return new ResponseEntity<>(wrapper, HttpStatus.OK);
+        return new ResponseEntity<>(collectWrapper(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/get/{id}")
@@ -75,5 +66,18 @@ public class EmployeeController {
     public ResponseEntity<Employee> deleteEmployee(@PathVariable int id) {
         dao.deleteEmployee(id);
         return new ResponseEntity<>(dao.getById(id), HttpStatus.OK);
+    }
+
+    private EmployeeWrapper collectWrapper() {
+        List<Department> departments = departmentDAO.getAll();
+        List<Service> services = serviceDAO.getAll();
+        List<OperatorBoard> boards = boardDAO.getAll();
+
+        wrapper.setEmployees(dao.getAll());
+        wrapper.setBoards(boards);
+        wrapper.setDepartments(departments);
+        wrapper.setServices(services);
+
+        return wrapper;
     }
 }

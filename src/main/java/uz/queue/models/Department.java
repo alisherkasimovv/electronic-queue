@@ -1,5 +1,5 @@
 package uz.queue.models;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.Nullable;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name= "departments")
@@ -52,11 +51,10 @@ public class Department {
                     CascadeType.MERGE
             },
             mappedBy = "department")
-//    @JsonBackReference(value = "s-d")
+    @JsonBackReference
     private Set<Service> services = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
-//    @JsonBackReference(value = "e-d")
+    @OneToMany(mappedBy="department")
     @JsonManagedReference(value = "e-d")
     private Set<Employee> employees;
 }

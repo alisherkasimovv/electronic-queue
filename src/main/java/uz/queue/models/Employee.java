@@ -1,6 +1,7 @@
 package uz.queue.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -57,20 +58,17 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonManagedReference(value = "e-d")
     @JsonBackReference(value = "e-d")
     private Department department;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "service_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonManagedReference(value = "e-s")
     @JsonBackReference(value = "e-s")
     private Service prioritizedService;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "board_id", referencedColumnName = "id")
-//    @JsonManagedReference(value = "e-b")
     @JsonBackReference(value = "e-b")
     private OperatorBoard board;
 }
