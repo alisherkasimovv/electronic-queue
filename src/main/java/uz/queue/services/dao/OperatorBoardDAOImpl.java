@@ -24,6 +24,11 @@ public class OperatorBoardDAOImpl implements OperatorBoardDAO {
     }
 
     @Override
+    public List<OperatorBoard> getAllByIsReservedFalse() {
+        return repository.findAllByIsReservedFalse();
+    }
+
+    @Override
     public OperatorBoard getById(int id) {
         return repository.findById(id);
     }
@@ -45,10 +50,10 @@ public class OperatorBoardDAOImpl implements OperatorBoardDAO {
 
     @Override
     public void editOperatorBoard(OperatorBoard operatorBoard) {
-
         OperatorBoard temp = repository.findById(operatorBoard.getId());
         temp.setIdentification(operatorBoard.getIdentification());
         temp.setLink(operatorBoard.getLink());
+        temp.setIsReserved(operatorBoard.getIsReserved());
         repository.save(temp);
     }
 

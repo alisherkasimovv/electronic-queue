@@ -1,4 +1,5 @@
 package uz.queue.models;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -9,12 +10,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.Nullable;
 
-import java.time.LocalDateTime;
-import java.util.*;
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name= "departments")
+@Table(name = "departments")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -54,7 +56,7 @@ public class Department {
     @JsonBackReference
     private Set<Service> services = new HashSet<>();
 
-    @OneToMany(mappedBy="department")
+    @OneToMany(mappedBy = "department")
     @JsonManagedReference(value = "e-d")
     private Set<Employee> employees;
 }

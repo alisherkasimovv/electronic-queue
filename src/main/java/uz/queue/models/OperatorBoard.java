@@ -1,6 +1,5 @@
 package uz.queue.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -35,6 +35,10 @@ public class OperatorBoard {
     @Nullable
     @Column(name = "url")
     private String link;
+
+    @NonNull
+    @Column(name = "isReserved", nullable = false, columnDefinition = "boolean default 'false'")
+    private Boolean isReserved;
 
     /*
      * Timestamps

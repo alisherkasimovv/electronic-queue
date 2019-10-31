@@ -10,6 +10,8 @@ public interface ServiceRepository extends JpaRepository<Service, Integer> {
 
     Service findById(int id);
     List<Service> findServicesByDepartment(Department department);
+
+    List<Service> findAllByDepartment(Department department);
     Service deleteById(int id);
 
 }

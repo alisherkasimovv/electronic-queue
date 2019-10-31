@@ -5,7 +5,7 @@ app.controller('EmployeeController', function ($scope, $http) {
 
     $http({
         method: 'GET',
-        url:    '/employees/get-all'
+        url: '/employees/get-all'
     }).then(function (response) {
         $scope.employees = response.data.employees;
         $scope.boards = response.data.boards;
@@ -18,9 +18,18 @@ app.controller('EmployeeController', function ($scope, $http) {
     $scope.getEmployee = function ($employee) {
         $http({
             method: 'GET',
-            url:    '/employees/get/' + $employee.id
+            url: '/employees/get/' + $employee.id
         }).then(function (response) {
             $scope.emp = response.data;
+        });
+    };
+
+    $scope.getServiceByDepartmentId = function ($department) {
+        $http({
+            method: 'GET',
+            url: '/employees/getServicesByDepartmentId/' + $scope.emp.department.id
+        }).then(function (response) {
+            $scope.services = response.data;
         });
     };
 
@@ -28,8 +37,8 @@ app.controller('EmployeeController', function ($scope, $http) {
         $scope.obj = $scope.emp;
         $http({
             method: 'POST',
-            url:    '/employees/save',
-            data:   $scope.emp
+            url: '/employees/save',
+            data: $scope.emp
         }).then(function (response) {
             $scope.employees = response.data.employees;
             $scope.boards = response.data.boards;
@@ -42,8 +51,8 @@ app.controller('EmployeeController', function ($scope, $http) {
     $scope.updateEmployee = function () {
         $http({
             method: 'POST',
-            url:    '/employees/update',
-            data:   $scope.emp
+            url: '/employees/update',
+            data: $scope.emp
         }).then(function (response) {
             $scope.employees = response.data.employees;
             $scope.boards = response.data.boards;
@@ -56,7 +65,7 @@ app.controller('EmployeeController', function ($scope, $http) {
     $scope.deleteEmployee = function ($employee) {
         $http({
             method: "GET",
-            url:    "/employees/delete/" + $employee.id,
+            url: "/employees/delete/" + $employee.id
         }).then(function (response) {
             $scope.employees = response.data.employees;
             $scope.boards = response.data.boards;
@@ -70,7 +79,7 @@ app.controller('EmployeeController', function ($scope, $http) {
 app.controller('BoardController', function ($scope, $http) {
     $http({
         method: 'GET',
-        url:    '/boards/get-all'
+        url: '/boards/get-all'
     }).then(function (response) {
         $scope.boards = response.data;
     });
@@ -78,7 +87,7 @@ app.controller('BoardController', function ($scope, $http) {
     $scope.getBoard = function ($board) {
         $http({
             method: 'GET',
-            url:    '/boards/get/' + $board.id
+            url: '/boards/get/' + $board.id
         }).then(function (response) {
             $scope.brd = response.data;
         });
@@ -87,8 +96,8 @@ app.controller('BoardController', function ($scope, $http) {
     $scope.saveBoard = function () {
         $http({
             method: 'POST',
-            url:    '/boards/save',
-            data:   $scope.brd
+            url: '/boards/save',
+            data: $scope.brd
         }).then(function (response) {
             $scope.boards = response.data;
             $scope.brd = {};
@@ -98,8 +107,8 @@ app.controller('BoardController', function ($scope, $http) {
     $scope.updateBoard = function () {
         $http({
             method: 'POST',
-            url:    '/boards/update',
-            data:   $scope.brd
+            url: '/boards/update',
+            data: $scope.brd
         }).then(function (response) {
             $scope.boards = response.data;
             $scope.brd = {};
@@ -109,7 +118,7 @@ app.controller('BoardController', function ($scope, $http) {
     $scope.deleteBoard = function ($board) {
         $http({
             method: "GET",
-            url:    "/boards/delete/" + $board.id,
+            url: "/boards/delete/" + $board.id
         }).then(function (response) {
             $scope.employee = response.data;
             $scope.brd = {};
@@ -120,7 +129,7 @@ app.controller('BoardController', function ($scope, $http) {
 app.controller('ServiceController', function ($scope, $http) {
     $http({
         method: 'GET',
-        url:    '/services/get-all'
+        url: '/services/get-all'
     }).then(function (response) {
         $scope.services = response.data;
     });
@@ -128,7 +137,7 @@ app.controller('ServiceController', function ($scope, $http) {
     $scope.getService = function ($service) {
         $http({
             method: 'GET',
-            url:    '/services/get/' + $service.id
+            url: '/services/get/' + $service.id
         }).then(function (response) {
             $scope.srv = response.data;
         });
@@ -137,8 +146,8 @@ app.controller('ServiceController', function ($scope, $http) {
     $scope.saveService = function () {
         $http({
             method: 'POST',
-            url:    '/services/save',
-            data:   $scope.srv
+            url: '/services/save',
+            data: $scope.srv
         }).then(function (response) {
             $scope.services = response.data;
             $scope.srv = {};
@@ -148,8 +157,8 @@ app.controller('ServiceController', function ($scope, $http) {
     $scope.updateService = function () {
         $http({
             method: 'POST',
-            url:    '/services/update',
-            data:   $scope.srv
+            url: '/services/update',
+            data: $scope.srv
         }).then(function (response) {
             $scope.services = response.data;
             $scope.srv = {};
@@ -159,7 +168,7 @@ app.controller('ServiceController', function ($scope, $http) {
     $scope.deleteService = function ($service) {
         $http({
             method: "GET",
-            url:    "/services/delete/" + $service.id
+            url: "/services/delete/" + $service.id
         }).then(function (response) {
             $scope.services = response.data;
             $scope.srv = {};
@@ -170,7 +179,7 @@ app.controller('ServiceController', function ($scope, $http) {
 app.controller('DepartmentController', function ($scope, $http) {
     $http({
         method: 'GET',
-        url:    '/departments/get-all'
+        url: '/departments/get-all'
     }).then(function (response) {
         $scope.departments = response.data;
     });
@@ -178,7 +187,7 @@ app.controller('DepartmentController', function ($scope, $http) {
     $scope.getDepartment = function ($department) {
         $http({
             method: 'GET',
-            url:    '/departments/get/' + $department.id
+            url: '/departments/get/' + $department.id
         }).then(function (response) {
             $scope.drp = response.data;
         });
@@ -187,8 +196,8 @@ app.controller('DepartmentController', function ($scope, $http) {
     $scope.saveDepartment = function () {
         $http({
             method: 'POST',
-            url:    '/departments/save',
-            data:   $scope.drp
+            url: '/departments/save',
+            data: $scope.drp
         }).then(function (response) {
             $scope.departments = response.data;
             $scope.drp = {};
@@ -198,8 +207,8 @@ app.controller('DepartmentController', function ($scope, $http) {
     $scope.updateDepartment = function () {
         $http({
             method: 'POST',
-            url:    '/departments/update',
-            data:   $scope.drp
+            url: '/departments/update',
+            data: $scope.drp
         }).then(function (response) {
             $scope.departments = response.data;
             $scope.drp = {};
@@ -209,7 +218,7 @@ app.controller('DepartmentController', function ($scope, $http) {
     $scope.deleteDepartment = function ($department) {
         $http({
             method: "GET",
-            url:    "/departments/delete/" + $department.id
+            url: "/departments/delete/" + $department.id
         }).then(function (response) {
             $scope.departments = response.data;
             $scope.drp = {};

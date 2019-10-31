@@ -25,13 +25,12 @@
             <td>{{ employee.lastName }}</td>
             <td>{{ employee.username }}</td>
             <td>
-                <div class="btn-group">
-                    <a href=""></a>
-                    <a ng-click="getEmployee(employee)" class="btn btn-info">
-                        <i class="fa fa-edit"></i>
+                <div class="btn-group p-3">
+                    <a class="btn btn-primary" ng-click="getEmployee(employee)">
+                        EDIT
                     </a>
-                    <a ng-click="deleteEmployee(employee)" class="btn btn-info">
-                        <i class="fa fa-trash"></i>
+                    <a class="btn btn-danger" ng-click="deleteEmployee(employee)">
+                        DROP *
                     </a>
                 </div>
             </td>
@@ -51,8 +50,8 @@
         <!--</tr>-->
     <!--</table>-->
 
-    {{ employees }}
-    {{ boards }}
+    <!--    {{ employees }}-->
+    <!--    {{ boards }}-->
 
     <form role="form" ng-submit="saveEmployee()">
         <div class="form-group">
@@ -76,15 +75,18 @@
         </div>
         <div class="form-group">
             <label for="service">Department</label>
-            <select ng-model="emp.department" id="department" class="form-control">
-                <option value="0" selected="selected">-- Select an option --</option>
-                <option ng-repeat="department in departments" ng-value="department">{{ department.name }}</option>
+            <!--            <select ng-model="department" id="department" class="form-control">-->
+            <select class="form-control" id="department"
+                    ng-change="getServiceByDepartmentId(department)" ng-model="emp.department"
+                    ng-options="department as department.name for department in departments">
+                <!--                <option value="">&#45;&#45; Select an option &#45;&#45;</option>-->
+                <!--                <option ng-repeat="department in departments" ng-value="department">{{ department.name }}</option>-->
             </select>
         </div>
         <div class="form-group">
             <label for="service">Select service</label>
             <select ng-model="emp.prioritizedService" id="service" class="form-control">
-                <option value="0" selected="selected">-- Select an option --</option>
+                <!--                <option value="0" selected="selected">&#45;&#45; Select an option &#45;&#45;</option>-->
                 <option ng-repeat="service in services" ng-value="service">{{ service.name }}</option>
             </select>
         </div>
@@ -92,7 +94,7 @@
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
 
-    {{ obj }}
+    <!--    {{ obj }}-->
 
 </section>
 

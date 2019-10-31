@@ -50,8 +50,15 @@ public class EmployeeController {
         return new ResponseEntity<>(dao.getById(id), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/getServicesByDepartmentId/{id}")
+    public ResponseEntity<List<Service>> getServicesByDepartmentId(@PathVariable int id) {
+        return new ResponseEntity<>(serviceDAO.getAllByDepartmentId(id), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/save")
     public ResponseEntity<List<Employee>> saveEmployee(@Valid @RequestBody Employee employee) {
+        employee.getBoard().setIsReserved(true);
+        boardDAO.editOperatorBoard(employee.getBoard());
         dao.saveEmployee(employee);
         return new ResponseEntity<>(dao.getAll(), HttpStatus.OK);
     }
@@ -64,6 +71,13 @@ public class EmployeeController {
 
     @GetMapping(value = "/delete/{id}")
     public ResponseEntity<Employee> deleteEmployee(@PathVariable int id) {
+        Employee tempEmpl = dao.getById(id);
+        OperatorBoard tempBoard = tempEmpl.getBoard();
+        Department tempDept = tempEmpl.getDepartment();
+        Service tempService = tempEmpl.getPrioritizedService();
+
+        
+
         dao.deleteEmployee(id);
         return new ResponseEntity<>(dao.getById(id), HttpStatus.OK);
     }
@@ -71,7 +85,7 @@ public class EmployeeController {
     private EmployeeWrapper collectWrapper() {
         List<Department> departments = departmentDAO.getAll();
         List<Service> services = serviceDAO.getAll();
-        List<OperatorBoard> boards = boardDAO.getAll();
+        List<OperatorBoard> boards = boardDAO.getAllByIsReservedFalse();
 
         wrapper.setEmployees(dao.getAll());
         wrapper.setBoards(boards);
