@@ -32,7 +32,7 @@ public class Employee {
     @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "password", unique = true)
+    @Column(name = "password")
     private String password;
 
     @Nullable
@@ -55,20 +55,19 @@ public class Employee {
     /*
      * Relations
      */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "department_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Nullable
+    @ManyToOne
+    @JoinColumn(columnDefinition = "integer", name="department_id", referencedColumnName = "id")
     @JsonBackReference(value = "e-d")
     private Department department;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "service_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne()
+    @JoinColumn(columnDefinition = "integer", name = "service_id", referencedColumnName = "id")
     @JsonBackReference(value = "e-s")
     private Service prioritizedService;
 
-    @OneToOne
-    @JoinColumn(name = "board_id", referencedColumnName = "id")
+    @OneToOne()
+    @JoinColumn(columnDefinition = "integer", name = "board_id", referencedColumnName = "id")
     @JsonBackReference(value = "e-b")
     private OperatorBoard board;
 }

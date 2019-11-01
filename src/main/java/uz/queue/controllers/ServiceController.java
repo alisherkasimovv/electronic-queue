@@ -43,7 +43,7 @@ public class ServiceController {
         return  new ResponseEntity<>(dao.getAll(), HttpStatus.OK);
     }
 
-    @PostMapping(value="/delete/{id}")
+    @GetMapping(value="/delete/{id}")
     public ResponseEntity<List<Service>> deleteService(@PathVariable int id){
         dao.deleteService(id);
         return  new ResponseEntity<>(dao.getAll(),HttpStatus.OK);

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.Nullable;
@@ -54,7 +55,20 @@ public class Department {
     @JsonBackReference
     private Set<Service> services = new HashSet<>();
 
-    @OneToMany(mappedBy="department")
+    @OneToMany(targetEntity = Employee.class,
+            mappedBy="department",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     @JsonManagedReference(value = "e-d")
     private Set<Employee> employees;
+
+    @PreRemove
+    private void preRemove() {
+        for (Employee employee : this.getEmployees())
+            employee.setDepartment(null);
+
+        for (Service service : this.getServices())
+            service.setDepartment(null);
+    }
 }

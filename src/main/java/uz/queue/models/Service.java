@@ -1,16 +1,12 @@
 package uz.queue.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.Nullable;
 import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
-import java.util.List;
 import javax.persistence.*;
 import java.util.*;
 
@@ -55,8 +51,17 @@ public class Service {
     @JoinTable(name = "services_departments",
             joinColumns = { @JoinColumn(name = "service_id") },
             inverseJoinColumns = { @JoinColumn(name = "department_id") })
-    private Set<Department> department = new HashSet<>();
+    private Set<Department> department;
+
+    @OneToMany(targetEntity = Employee.class,
+            mappedBy="prioritizedService",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER
+    )
     @JsonManagedReference(value = "e-s")
-    @OneToMany(mappedBy="prioritizedService")
     private Set<Employee> employees;
+
+    @JsonManagedReference(value = "s-o")
+    @OneToMany(mappedBy="service")
+    private Set<Order> orders;
 }
