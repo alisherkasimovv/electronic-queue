@@ -1,11 +1,10 @@
 package uz.queue.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.Nullable;
@@ -46,17 +45,18 @@ public class Department {
     /*
      * Relations
      */
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "department")
-    @JsonBackReference
-    private Set<Service> services = new HashSet<>();
+    @OneToMany(
+            targetEntity = Service.class,
+            mappedBy = "department",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference(value = "s-d")
+    private Set<Service> services;
 
-    @OneToMany(targetEntity = Employee.class,
-            mappedBy="department",
+    @OneToMany(
+            targetEntity = Employee.class,
+            mappedBy = "department",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )

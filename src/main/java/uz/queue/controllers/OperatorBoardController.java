@@ -45,9 +45,9 @@ public class OperatorBoardController {
         return  new ResponseEntity<>(operatorBoardDAO.getAll(), HttpStatus.OK);
     }
 
-    @PostMapping(value="/delete")
-    public ResponseEntity<List<OperatorBoard>> deleteBoard(@Valid @RequestBody OperatorBoard operatorBoard){
-        operatorBoardDAO.deleteOperatorBoard(operatorBoard);
+    @GetMapping(value="/delete/{id}")
+    public ResponseEntity<List<OperatorBoard>> deleteBoard(@PathVariable int id){
+        operatorBoardDAO.deleteOperatorBoard(id);
         return  new ResponseEntity<>(operatorBoardDAO.getAll(),HttpStatus.OK);
     }
 }

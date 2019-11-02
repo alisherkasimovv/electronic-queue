@@ -12,6 +12,6 @@ public interface OperatorBoardDAO {
     OperatorBoard getByUrl(String link);
     void saveOperatorBoard(OperatorBoard operatorBoard);
     void editOperatorBoard(OperatorBoard operatorBoard);
-    void deleteOperatorBoard(OperatorBoard operatorBoard);
+    void deleteOperatorBoard(int id);
 
 }

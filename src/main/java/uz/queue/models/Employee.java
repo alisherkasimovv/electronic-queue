@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.Nullable;
 
@@ -57,16 +55,18 @@ public class Employee {
      */
     @Nullable
     @ManyToOne
-    @JoinColumn(columnDefinition = "integer", name="department_id", referencedColumnName = "id")
+    @JoinColumn(columnDefinition = "integer", name = "department_id", referencedColumnName = "id")
     @JsonBackReference(value = "e-d")
     private Department department;
 
-    @ManyToOne()
+    @Nullable
+    @ManyToOne
     @JoinColumn(columnDefinition = "integer", name = "service_id", referencedColumnName = "id")
     @JsonBackReference(value = "e-s")
     private Service prioritizedService;
 
-    @OneToOne()
+    @Nullable
+    @OneToOne
     @JoinColumn(columnDefinition = "integer", name = "board_id", referencedColumnName = "id")
     @JsonBackReference(value = "e-b")
     private OperatorBoard board;

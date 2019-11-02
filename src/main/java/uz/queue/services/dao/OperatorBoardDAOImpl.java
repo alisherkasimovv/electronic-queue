@@ -53,7 +53,7 @@ public class OperatorBoardDAOImpl implements OperatorBoardDAO {
     }
 
     @Override
-    public void deleteOperatorBoard(OperatorBoard operatorBoard) {
-        repository.delete(operatorBoard);
+    public void deleteOperatorBoard(int id) {
+        repository.deleteById(id);
     }
 }

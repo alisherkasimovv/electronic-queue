@@ -1,5 +1,6 @@
 package uz.queue.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,17 +19,18 @@ import java.util.*;
 @NoArgsConstructor
 public class Service {
 
+    // TODO Maybe services on orders could be detected by their UUID.
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "serial")
     private int id;
 
-
     @Column(name = "name", unique = true)
     private String name;
 
     @Nullable
-    @Column(name = "description", unique = true)
+    @Column(name = "description")
     private String description;
 
     /*
@@ -43,25 +45,34 @@ public class Service {
     /*
      * Relations
      */
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(name = "services_departments",
-            joinColumns = { @JoinColumn(name = "service_id") },
-            inverseJoinColumns = { @JoinColumn(name = "department_id") })
-    private Set<Department> department;
+    @Nullable
+    @ManyToOne
+    @JoinColumn(columnDefinition = "integer", name="department_id", referencedColumnName = "id")
+    @JsonBackReference(value = "s-d")
+    private Department department;
 
-    @OneToMany(targetEntity = Employee.class,
-            mappedBy="prioritizedService",
-            cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER
+    @OneToMany(
+            targetEntity = Employee.class,
+            mappedBy = "prioritizedService",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
     )
     @JsonManagedReference(value = "e-s")
     private Set<Employee> employees;
 
+    @OneToMany(
+            targetEntity = Order.class,
+            mappedBy = "service",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     @JsonManagedReference(value = "s-o")
-    @OneToMany(mappedBy="service")
     private Set<Order> orders;
+
+    // TODO PreRemove for Orders should be added
+    @PreRemove
+    private void preRemove() {
+        for (Employee employee : this.getEmployees())
+            employee.setPrioritizedService(null);
+    }
 }
