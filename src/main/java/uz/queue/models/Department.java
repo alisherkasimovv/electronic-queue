@@ -48,7 +48,7 @@ public class Department {
     @OneToMany(
             targetEntity = Service.class,
             mappedBy = "department",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY
     )
     @JsonManagedReference(value = "s-d")
@@ -57,7 +57,7 @@ public class Department {
     @OneToMany(
             targetEntity = Employee.class,
             mappedBy = "department",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY
     )
     @JsonManagedReference(value = "e-d")

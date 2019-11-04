@@ -54,7 +54,7 @@ public class Service {
     @OneToMany(
             targetEntity = Employee.class,
             mappedBy = "prioritizedService",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY
     )
     @JsonManagedReference(value = "e-s")
@@ -63,7 +63,7 @@ public class Service {
     @OneToMany(
             targetEntity = Order.class,
             mappedBy = "service",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY
     )
     @JsonManagedReference(value = "s-o")
