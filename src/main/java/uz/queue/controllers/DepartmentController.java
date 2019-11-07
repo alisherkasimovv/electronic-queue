@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/departments")
 public class DepartmentController {
 
@@ -21,9 +22,14 @@ public class DepartmentController {
         this.dao = departmentDAO;
     }
 
-    @GetMapping(value = "get-all")
+    @GetMapping(value = "/get-all")
     public ResponseEntity<List<Department>> getAllDepartments() {
         return new ResponseEntity<>(dao.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity<Department> getOneById(@PathVariable int id) {
+        return new ResponseEntity<>(dao.getById(id), HttpStatus.OK);
     }
 
     @PostMapping(value = "/save")

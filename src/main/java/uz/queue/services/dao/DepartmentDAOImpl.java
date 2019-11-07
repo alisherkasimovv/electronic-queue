@@ -20,8 +20,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
     @Override
     public List<Department> getAll() {
-        List<Department> departmentsList = repository.findAll();
-        return departmentsList;
+        return repository.findAll();
     }
 
     @Override

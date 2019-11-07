@@ -1,13 +1,9 @@
 package uz.queue.wrappers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import uz.queue.models.Department;
 import uz.queue.models.Employee;
 import uz.queue.models.OperatorBoard;
 import uz.queue.models.Service;
-import uz.queue.services.dao.interfaces.EmployeeDAO;
-import uz.queue.services.dao.interfaces.OperatorBoardDAO;
 
 import java.util.List;
 

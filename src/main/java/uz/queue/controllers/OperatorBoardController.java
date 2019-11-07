@@ -12,7 +12,8 @@ import uz.queue.services.dao.interfaces.OperatorBoardDAO;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/boards")
 public class OperatorBoardController {
 
@@ -34,7 +35,7 @@ public class OperatorBoardController {
         return new ResponseEntity<>(operatorBoardDAO.getAll(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/get-one/{id}")
+    @GetMapping(value = "/get/{id}")
     public  ResponseEntity<OperatorBoard> getOneOperator(@PathVariable int id){
         return new ResponseEntity<>(operatorBoardDAO.getById(id), HttpStatus.OK);
     }

@@ -1,6 +1,5 @@
 package uz.queue.services.dao.interfaces;
 
-import uz.queue.models.Employee;
 import uz.queue.models.OperatorBoard;
 
 import java.util.List;

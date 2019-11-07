@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://192.168.0.19:4200")
 @RequestMapping("/services")
 public class ServiceController {
 
@@ -32,7 +33,7 @@ public class ServiceController {
         return new ResponseEntity<>(dao.getAll(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/get-one/{id}")
+    @GetMapping(value = "/get/{id}")
     public  ResponseEntity<Service> getOneService(@PathVariable int id){
         return new ResponseEntity<>(dao.getServiceById(id), HttpStatus.OK);
     }

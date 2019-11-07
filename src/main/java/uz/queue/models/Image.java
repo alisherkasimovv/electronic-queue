@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
-import java.util.*;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;

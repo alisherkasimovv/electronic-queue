@@ -1,12 +1,13 @@
 package uz.queue.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.Nullable;
 
@@ -54,20 +55,23 @@ public class Employee {
      * Relations
      */
     @Nullable
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(columnDefinition = "integer", name = "department_id", referencedColumnName = "id")
+    @Fetch(FetchMode.JOIN)
     @JsonBackReference(value = "e-d")
     private Department department;
 
     @Nullable
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(columnDefinition = "integer", name = "service_id", referencedColumnName = "id")
+    @Fetch(FetchMode.JOIN)
     @JsonBackReference(value = "e-s")
     private Service prioritizedService;
 
     @Nullable
     @OneToOne
     @JoinColumn(columnDefinition = "integer", name = "board_id", referencedColumnName = "id")
+    @Fetch(FetchMode.JOIN)
     @JsonBackReference(value = "e-b")
     private OperatorBoard board;
 }

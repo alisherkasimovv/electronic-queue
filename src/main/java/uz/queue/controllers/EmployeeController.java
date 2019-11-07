@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/employees")
 public class EmployeeController {
 
@@ -41,8 +42,8 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/get-all")
-    public ResponseEntity<EmployeeWrapper> getAllEmployees() {
-        return new ResponseEntity<>(collectWrapper(), HttpStatus.OK);
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        return new ResponseEntity<>(dao.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/get/{id}")
